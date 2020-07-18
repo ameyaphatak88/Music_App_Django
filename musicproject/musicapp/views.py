@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Song
 from .forms import SongForm
+from django.http import HttpResponseRedirect
+from .models import Song
+from django.urls import reverse
 from django.views import generic
 
 def index(request):
@@ -23,5 +25,7 @@ def song_form(request):
 			print(singer)
 			print(movie)
 			print(genre)
+	else:
+		form = SongForm()
 	return render(request, 'musicapp/songform.html', {'form': form})
 
