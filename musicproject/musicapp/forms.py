@@ -6,3 +6,4 @@ class SongForm(forms.Form):
 	singer = forms.CharField(label='singer', max_length=100)
 	movie = forms.CharField(label='movie', max_length=100)
 	genre = forms.CharField(label='genre', max_length=100)
+	playlist = forms.CharField(label='playlist', max_length=100, required = False)

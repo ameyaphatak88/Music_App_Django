@@ -6,4 +6,5 @@ class Song(models.Model):
 	singer = models.CharField(max_length = 20)
 	movie = models.CharField(max_length = 20)
 	genre = models.CharField(max_length = 20)
+	playlist = models.CharField(max_length = 20, default = "")
 	

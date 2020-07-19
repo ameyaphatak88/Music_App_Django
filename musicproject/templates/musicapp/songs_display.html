@@ -1,17 +1,38 @@
+
 <!DOCTYPE html>
 <html>
-<head>
+    <style>
+    div {
+    border: 1px solid black;
+    background-color: lightblue;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width:500px;
+    }
 
+    body {
+        background-color: chartreuse;
+    }
+    </style>
+<head>
 <title></title>
 </head>
-<body>
+<body>  
+    <h1><b><i>Here are the details of all songs :</i></b></h1>
     <ul>
     {% for asong in songs %}
+    <div>
     <li>Name : {{asong.name}}</li>
     <li>Singer : {{asong.singer}}</li>
     <li>Movie : {{asong.movie}}</li>
     <li>Genre : {{asong.genre}}</li>
+    </div>
     {% endfor %}
     </ul>
+
 </body>
 </html>

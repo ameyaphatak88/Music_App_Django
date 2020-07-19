@@ -21,7 +21,8 @@ def song_form(request):
 			singer = form.cleaned_data['singer']
 			movie = form.cleaned_data['movie']
 			genre = form.cleaned_data['genre']
-			c =Song(name = name, singer = singer, movie = movie, genre = genre)
+			playlist = form.cleaned_data['playlist']
+			c =Song(name = name, singer = singer, movie = movie, genre = genre, playlist = playlist)
 			c.save()
 			return HttpResponseRedirect('songs/')
 	else:
