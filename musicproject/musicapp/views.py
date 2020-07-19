@@ -18,14 +18,17 @@ def song_form(request):
 		form = SongForm(request.POST)
 		if form.is_valid():
 			name = form.cleaned_data['name']
-			singer = form.cleaned_data['singer']
-			movie = form.cleaned_data['movie']
-			genre = form.cleaned_data['genre']
+			#singer = form.cleaned_data['singer']
+			#movie = form.cleaned_data['movie']
+			#genre = form.cleaned_data['genre']
+			print("vanar sena")
 			print(name)
-			print(singer)
-			print(movie)
-			print(genre)
+			#print(singer)
+			#print(movie)
+			#print(genre)
 	else:
 		form = SongForm()
+		print("namaskar")
+	print("ram ram")
 	return render(request, 'musicapp/songform.html', {'form': form})
 
