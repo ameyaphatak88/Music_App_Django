@@ -18,17 +18,26 @@ def song_form(request):
 		form = SongForm(request.POST)
 		if form.is_valid():
 			name = form.cleaned_data['name']
-			#singer = form.cleaned_data['singer']
-			#movie = form.cleaned_data['movie']
-			#genre = form.cleaned_data['genre']
-			print("vanar sena")
-			print(name)
-			#print(singer)
-			#print(movie)
-			#print(genre)
+			singer = form.cleaned_data['singer']
+			movie = form.cleaned_data['movie']
+			genre = form.cleaned_data['genre']
+			c =Song(name = name, singer = singer, movie = movie, genre = genre)
+			c.save()
+			return HttpResponseRedirect('songs/')
 	else:
 		form = SongForm()
-		print("namaskar")
-	print("ram ram")
 	return render(request, 'musicapp/songform.html', {'form': form})
+
+
+def songs_display(request):
+	from musicapp.models import Song
+	songs = Song.objects.all()
+
+	context = {
+		"songs" : songs
+	}
+
+	template = loader.get_template('musicapp/songs_display.html')
+	return HttpResponse(template.render(context, request))
+
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title></title>
+</head>
+<body>
+    <ul>
+    {% for asong in songs %}
+    <li>Name : {{asong.name}}</li>
+    <li>Singer : {{asong.singer}}</li>
+    <li>Movie : {{asong.movie}}</li>
+    <li>Genre : {{asong.genre}}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
