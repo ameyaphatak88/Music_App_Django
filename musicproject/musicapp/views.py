@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from .models import Song
 from django.urls import reverse
 from django.views import generic
+import numpy as np
 
 def index(request):
     return HttpResponse("Hi")
@@ -40,5 +41,37 @@ def songs_display(request):
 
 	template = loader.get_template('musicapp/songs_display.html')
 	return HttpResponse(template.render(context, request))
+
+def playlists_display(request):
+	from musicapp.models import Song
+	songs = Song.objects.all()
+
+	playlists = []
+	for asong in songs:
+		if asong.playlist not in playlists:
+			playlists.append(asong.playlist)
+	print(playlists)
+	n = len(playlists)
+	arr = np.empty(n)
+	for i in range(1,n+1):
+		arr[i]  = []
+
+	i = 0
+	for aplaylist in playlists:
+		i = i + 1
+		for asong in songs:
+			if asong.playlist == aplaylist:
+				arr[i].append(asong)
+	
+	print(arr[1])
+
+	return HttpResponse("namaskar mandali!")
+				
+
+
+	
+
+
+
 
 
