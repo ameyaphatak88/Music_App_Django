@@ -50,22 +50,20 @@ def playlists_display(request):
 	for asong in songs:
 		if asong.playlist not in playlists:
 			playlists.append(asong.playlist)
-	print(playlists)
-	n = len(playlists)
-	arr = np.empty(n)
-	for i in range(1,n+1):
-		arr[i]  = []
-
-	i = 0
+	playlist_dict = {}
 	for aplaylist in playlists:
-		i = i + 1
-		for asong in songs:
-			if asong.playlist == aplaylist:
-				arr[i].append(asong)
-	
-	print(arr[1])
+		playlist_dict[aplaylist] = []
+	for asong in songs:
+		if asong.playlist in playlist_dict:
+			playlist_dict[asong.playlist].append(asong.name)
+    
+	print(playlist_dict.keys())
+	context = {
+		"playlist_dict" : playlist_dict
+	}
 
-	return HttpResponse("namaskar mandali!")
+	template = loader.get_template('musicapp/playlists_display.html')
+	return HttpResponse(template.render(context, request))
 				
 
 
