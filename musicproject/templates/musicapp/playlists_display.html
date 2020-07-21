@@ -1,16 +1,47 @@
 <!DOCTYPE html> 
 <html>
-    <head>
+    <style>
+        div {
+                border: 1px solid black;
+                background-color: lightblue;
+                padding-top: 50px;
+                padding-right: 30px;
+                padding-bottom: 50px;
+                padding-left: 80px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width:500px;
+            }
 
-    </head>
+    body {
+        background-color: chartreuse;
+    }
+
+    h3 {
+        color: black;
+    }
+
+    h1 {
+        text-align: center;
+        color:black;
+    }
+
+    li {
+        color: blue;
+    }
+    </style>
+  
     <body>
+        <h1><b><i>Here are the playlists added : </i></b></h1>
             <ul>
                 {% for p,v in playlist_dict.items %}
-                <li> "hello"  </li>
-                <li> {{p}}  </li>
-                <li> {{v}}  </li>
-                {% endfor %}
-                
+                <div>
+                    <h3> {{p}}  </h3>
+                    {% for v1 in v %}
+                        <li>{{v1}}</li>
+                    {% endfor %}
+                </div>
+                {% endfor %}                
             </ul>
     </body>
 </html>
