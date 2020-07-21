@@ -5,9 +5,12 @@
     </head>
     <body>
             <ul>
-                {% for p in playlists_dict %}
-                <li>{p}</li>
+                {% for p,v in playlist_dict.items %}
+                <li> "hello"  </li>
+                <li> {{p}}  </li>
+                <li> {{v}}  </li>
                 {% endfor %}
+                
             </ul>
     </body>
 </html>

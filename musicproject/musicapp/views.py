@@ -62,6 +62,9 @@ def playlists_display(request):
 		"playlist_dict" : playlist_dict
 	}
 
+	print("------------printing playlist------------------------------------------")
+	print(context["playlist_dict"])
+	print("------------------------------------------------------")
 	template = loader.get_template('musicapp/playlists_display.html')
 	return HttpResponse(template.render(context, request))
 				
