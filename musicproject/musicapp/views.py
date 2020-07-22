@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import SongForm
+from .forms import SongForm, Edit1
 from django.http import HttpResponseRedirect
-from .models import Song
+from .models import Song, Edit
 from django.urls import reverse
 from django.views import generic
 import numpy as np
@@ -69,8 +69,20 @@ def playlists_display(request):
 	return HttpResponse(template.render(context, request))
 				
 
+def edit_playlist(request):
+	if request.method == 'POST':
+		form = Edit1(request.POST)
+		if form.is_valid():
+			playlist_select = form.cleaned_data['playlist_select']
+			print(playlist_select)
+			c = Edit(playlist_select1 = playlist_select)
+			c.save()
+	else:
+		form = Edit1()
 
 	
+	
+	return render(request, 'musicapp/edit1.html', {'form': form})
 
 
 

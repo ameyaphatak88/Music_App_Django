@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form action = "" method = "post">
+            {% csrf_token %}
+            {{form.playlist_select}}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
