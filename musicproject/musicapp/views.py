@@ -8,6 +8,9 @@ from .models import Song, Edit
 from django.urls import reverse
 from django.views import generic
 import numpy as np
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 def index(request):
     return HttpResponse("Hi")
@@ -117,12 +120,12 @@ def _extract_song_object_to_dict(song):
 	songDict["playlist"] = song.name
 	return songDict
 
-
+@csrf_exempt 
 def get_songs(request):
 	#todo: interact with models to get list of songs
 	from musicapp.models import Song
 	
-	if request.method == 'POST':
+	if request.method == 'GET':
 		songs = []
 		for asong in Song.objects.all():
 			songs.append(_extract_song_object_to_dict(asong))
@@ -130,6 +133,8 @@ def get_songs(request):
 		songs_json = json.dumps(songs)
 		return HttpResponse(songs_json)
 	else:
+		print('Raw Data: "%s"' % request.body)   
+		return HttpResponse("OK")
 
 
 
