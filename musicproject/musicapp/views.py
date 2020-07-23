@@ -16,6 +16,7 @@ def song_form(request):
 	from musicapp.models import Song
 	songs = Song.objects.all()
 	if request.method == 'POST':
+		print("in if")
 		form = SongForm(request.POST)
 		if form.is_valid():
 			name = form.cleaned_data['name']
@@ -27,6 +28,7 @@ def song_form(request):
 			c.save()
 			return HttpResponseRedirect('songs/')
 	else:
+		print("in else")
 		form = SongForm()
 	return render(request, 'musicapp/songform.html', {'form': form})
 
@@ -45,8 +47,6 @@ def songs_display(request):
 def playlists_display(request):
 	from musicapp.models import Song
 	songs = Song.objects.all()
-
-	playlists = []
 	for asong in songs:
 		if asong.playlist not in playlists:
 			playlists.append(asong.playlist)
@@ -69,21 +69,63 @@ def playlists_display(request):
 	return HttpResponse(template.render(context, request))
 				
 
-def edit_playlist(request):
+def edit_song(request, song_name = "ameya"):
+	flag = 0
+	thatsong = 0
+	from musicapp.models import Song
+	songs = Song.objects.all()
+
+	for asong in songs:
+		if asong.name == song_name:
+			flag = 1			
+			thatsong = asong
+
+	print(thatsong)
+	if flag == 0:
+		return HttpResponse("Invalid song eneterd")
+
 	if request.method == 'POST':
+		print("in if")
 		form = Edit1(request.POST)
 		if form.is_valid():
-			playlist_select = form.cleaned_data['playlist_select']
-			print(playlist_select)
-			c = Edit(playlist_select1 = playlist_select)
-			c.save()
+			name = form.cleaned_data['name']
+			singer = form.cleaned_data['singer']
+			movie = form.cleaned_data['movie']
+			genre = form.cleaned_data['genre']
+			playlist = form.cleaned_data['playlist']
+			thatsong.name = name
+			thatsong.singer = singer
+			thatsong.movie = movie
+			thatsong.genre = genre
+			thatsong.playlist = playlist
+			thatsong.save()
+			return HttpResponseRedirect('songs/')
 	else:
+		print("else")
 		form = Edit1()
-
-	
 	
 	return render(request, 'musicapp/edit1.html', {'form': form})
 
+
+def edit_song2(request):
+	from musicapp.models import Song
+	songs = Song.objects.all()
+	if request.method == 'POST':
+		print("in if")
+		form = SongForm(request.POST)
+		if form.is_valid():
+			name = form.cleaned_data['name']
+			singer = form.cleaned_data['singer']
+			movie = form.cleaned_data['movie']
+			genre = form.cleaned_data['genre']
+			playlist = form.cleaned_data['playlist']
+			c =Song(name = name, singer = singer, movie = movie, genre = genre, playlist = playlist)
+			c.save()
+			return HttpResponseRedirect('songs/')
+	else:
+		print("in else")
+		form = SongForm()
+	return render(request, 'musicapp/songform.html', {'form': form})
 
 
 

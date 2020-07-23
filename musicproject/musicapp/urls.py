@@ -7,5 +7,6 @@ urlpatterns = [
     path('input_song/', views.song_form, name = "song_form"),
     path('input_song/songs/', views.songs_display, name = "songs_display"),
     path('playlists_display/', views.playlists_display, name = "playlists_display"),
-    path('edit_playlist/', views.edit_playlist, name = "edit_playlist")
+    path('playlist_edit/<str:song_name>/', views.edit_song),
+    path('playlist_edit/<str:song_name>/songs/', views.songs_display)
 ]

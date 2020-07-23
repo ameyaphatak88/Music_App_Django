@@ -24,4 +24,8 @@ class SongForm(forms.Form):
 
 
 class Edit1(forms.Form):
-	playlist_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+	name = forms.CharField(label=mark_safe('name'), max_length=100, required=False)
+	singer = forms.CharField(label='singer', max_length=100)
+	movie = forms.CharField(label='movie', max_length=100)
+	genre = forms.CharField(label='genre', max_length=100)
+	playlist = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)

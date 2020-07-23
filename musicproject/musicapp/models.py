@@ -9,5 +9,9 @@ class Song(models.Model):
 	playlist = models.CharField(max_length = 20, default = "")
 
 class Edit(models.Model):
-	playlist_select1 = models.CharField(max_length = 20)
+	name = models.CharField(max_length = 20, default =  "")
+	singer = models.CharField(max_length = 20, default = "")
+	movie = models.CharField(max_length = 20, default = "")
+	genre = models.CharField(max_length = 20, default = "")
+	playlist = models.CharField(max_length = 20, default = "")
 	
