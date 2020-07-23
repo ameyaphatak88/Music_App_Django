@@ -133,7 +133,16 @@ def get_songs(request):
 		songs_json = json.dumps(songs)
 		return HttpResponse(songs_json)
 	else:
-		print('Raw Data: "%s"' % request.body)   
+		songs = Song.objects.all()
+		for asong in songs:
+			print('Name: "%s"' % songs[0].name)
+			print('Movie: "%s"' % songs[0].movie)
+			print('Singer: "%s"' % songs[0].singer)
+			print('Genre: "%s"' % songs[0].genre)
+			print('Playlist: "%s"' % songs[0].playlist)
+			print("-----------------------------------------")
+
+		#print('Name: "%s"' % songs[0].name)   
 		return HttpResponse("OK")
 
 
