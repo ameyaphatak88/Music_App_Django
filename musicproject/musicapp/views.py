@@ -1,5 +1,4 @@
 import json
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
@@ -123,12 +122,15 @@ def get_songs(request):
 	#todo: interact with models to get list of songs
 	from musicapp.models import Song
 	
-	songs = []
-	for asong in Song.objects.all():
-		songs.append(_extract_song_object_to_dict(asong))
+	if request.method == 'POST':
+		songs = []
+		for asong in Song.objects.all():
+			songs.append(_extract_song_object_to_dict(asong))
 
-	songs_json = json.dumps(songs)
-	return HttpResponse(songs_json)
+		songs_json = json.dumps(songs)
+		return HttpResponse(songs_json)
+	else:
+
 
 
 
