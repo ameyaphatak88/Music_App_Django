@@ -8,5 +8,6 @@ urlpatterns = [
     path('input_song/songs/', views.songs_display, name = "songs_display"),
     path('playlists_display/', views.playlists_display, name = "playlists_display"),
     path('playlist_edit/<str:song_name>/', views.edit_song),
-    path('playlist_edit/<str:song_name>/songs/', views.songs_display)
+    path('playlist_edit/<str:song_name>/songs/', views.songs_display),
+    path('api/songs/', views.get_songs)
 ]

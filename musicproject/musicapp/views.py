@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
@@ -107,25 +109,26 @@ def edit_song(request, song_name = "ameya"):
 	return render(request, 'musicapp/edit1.html', {'form': form})
 
 
-def edit_song2(request):
+def _extract_song_object_to_dict(song):
+	songDict = {}
+	songDict["name"] = song.name
+	songDict["singer"] = song.name
+	songDict["movie"] = song.name
+	songDict["genre"] = song.name
+	songDict["playlist"] = song.name
+	return songDict
+
+
+def get_songs(request):
+	#todo: interact with models to get list of songs
 	from musicapp.models import Song
-	songs = Song.objects.all()
-	if request.method == 'POST':
-		print("in if")
-		form = SongForm(request.POST)
-		if form.is_valid():
-			name = form.cleaned_data['name']
-			singer = form.cleaned_data['singer']
-			movie = form.cleaned_data['movie']
-			genre = form.cleaned_data['genre']
-			playlist = form.cleaned_data['playlist']
-			c =Song(name = name, singer = singer, movie = movie, genre = genre, playlist = playlist)
-			c.save()
-			return HttpResponseRedirect('songs/')
-	else:
-		print("in else")
-		form = SongForm()
-	return render(request, 'musicapp/songform.html', {'form': form})
+	
+	songs = []
+	for asong in Song.objects.all():
+		songs.append(_extract_song_object_to_dict(asong))
+
+	songs_json = json.dumps(songs)
+	return HttpResponse(songs_json)
 
 
 
