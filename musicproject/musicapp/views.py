@@ -114,10 +114,10 @@ def edit_song(request, song_name = "ameya"):
 def _extract_song_object_to_dict(song):
 	songDict = {}
 	songDict["name"] = song.name
-	songDict["singer"] = song.name
-	songDict["movie"] = song.name
-	songDict["genre"] = song.name
-	songDict["playlist"] = song.name
+	songDict["singer"] = song.singer
+	songDict["movie"] = song.movie
+	songDict["genre"] = song.genre
+	songDict["playlist"] = song.playlist
 	return songDict
 
 @csrf_exempt 
@@ -133,17 +133,16 @@ def get_songs(request):
 		songs_json = json.dumps(songs)
 		return HttpResponse(songs_json)
 	else:
-		songs = Song.objects.all()
-		for asong in songs:
-			print('Name: "%s"' % songs[0].name)
-			print('Movie: "%s"' % songs[0].movie)
-			print('Singer: "%s"' % songs[0].singer)
-			print('Genre: "%s"' % songs[0].genre)
-			print('Playlist: "%s"' % songs[0].playlist)
-			print("-----------------------------------------")
+		
+			#print('Name : "%s"' %request.body)
 
-		#print('Name: "%s"' % songs[0].name)   
-		return HttpResponse("OK")
+			#print('Name: "%s"' % request.body["name"])
+			thatsong = json.loads(request.body)
+			songs = Song.objects.all()
+			print(thatsong["singer"])
+			c = Song(name = thatsong["name"], singer = "viraj", movie = thatsong["movie"], genre = thatsong["genre"], playlist = thatsong["playlist"])
+			c.save()
+			return HttpResponse("OK")
 
 
 
