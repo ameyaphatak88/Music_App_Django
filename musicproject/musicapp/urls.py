@@ -9,5 +9,6 @@ urlpatterns = [
     path('playlists_display/', views.playlists_display, name = "playlists_display"),
     path('playlist_edit/<str:song_name>/', views.edit_song),
     path('playlist_edit/<str:song_name>/songs/', views.songs_display),
-    path('api/songs/', views.get_songs)
+    path('api/songs/', views.get_songs),
+    path('querry_post/<str:song_name>/<str:song_singer>/<str:song_movie>/<str:song_genre>/<str:song_playlist>', views.query_post)
 ]

@@ -145,6 +145,11 @@ def get_songs(request):
 			return HttpResponse("OK")
 
 
-
+def query_post(request, song_name = "ameya",song_singer = "ameya",song_movie = "ameya",song_genre = "ameya",song_playlist = "ameya"):
+	from musicapp.models import Song
+	songs = Song.objects.all()
+	c =Song(name = song_name, singer = song_singer, movie = song_movie, genre = song_genre, playlist = song_playlist)
+	c.save()
+	return HttpResponse("saved")
 
 
